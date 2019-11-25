@@ -17,14 +17,14 @@ const config = {
 
 const
 	EOL = require('os').EOL,
-	SUBREDDIT_NAME = 'AskOuija',
+	SUBREDDIT_NAME = 'AskLuigi',
 	OUIJA_RESULT_CLASS = 'ouija-result',
 	COMMENT_SCORE_THRESHOLD = process.env.threshold;
 
 var
 	r = new snoowrap(config),
 	submissionId = process.argv[2],
-	goodbyeRegex = /^GOODBYE/,
+	goodbyeRegex = /^(GOODBYE|LOTSA SPAGHETTI)/,
 	link = /\[(.*?)\]\(.*?\)/g;
 
 // -------------- { MAIN } -----------------
@@ -355,7 +355,7 @@ function parseConfig(input){
 
 function updatePostFlair(post, response){
 	var letters = response.letters,
-		text = 'Ouija says: ' + letters.join('');
+		text = 'Luigi says: ' + letters.join('');
 
 	if (text.length > 64){
 		text = text.substr(0, 61) + '...';
@@ -388,11 +388,11 @@ function notifyUser(post, response){
 
 	var text = `**You asked:** ${post.title}` + EOL;
 	text += EOL;
-	text += `**Ouija says:** [${answer}](${url})`;
+	text += `**Luigi says:** [${answer}](${url})`;
 
 	r.compose_message({
 		to: post.author,
-		subject: 'THE OUIJA HAS SPOKEN',
+		subject: 'THE LUIGI HAS SPOKEN',
 		text,
 		from_subreddit: SUBREDDIT_NAME
 	});
